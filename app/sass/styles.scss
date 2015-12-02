@@ -30,7 +30,7 @@
 html {
 	background-image: url('compass.png'), url('background.png');
 	background-repeat: no-repeat, repeat;
-	background-position: left center, top left;
+	background-position: left bottom, top left;
 	background-size: 40em, 40em;
 	font-family: 'typography times', times;
 }
@@ -44,6 +44,13 @@ body {
 }
 
 .content-container {
+	font-weight: bold;
+	text-align: center;
+	min-height: 50vh;
+	width: 50%;
+	margin: 3em auto;
+	background-color: rgba(0, 0, 0, .1);
+	padding: 1em;
 }
 
 header {
@@ -56,3 +63,22 @@ header {
 	box-shadow: 0 5px 20px 0 #000000;
 }
 
+h2, p {
+	text-align: left;
+}
+
+.button {
+	display: inline-block;
+	font-weight: normal;
+	text-decoration: none;	
+	background-image: url('flag.png');
+	background-size: 100% 100%;
+	margin: 2em;
+	padding: 1em 3em 1em 2em;
+	&:visited, &:active, &:link {
+		color: #ffff8e;
+	}
+	&:hover {
+		color: #ff8e8e;
+	}
+}
