@@ -1,0 +1,44 @@
+@font-face {
+  font-family: "quest";
+  src: url("fonts/Last King Quest.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "typography times";
+  src: url("fonts/Typography Times Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "typography times";
+  src: url("fonts/Typography Times Bold.ttf") format("truetype");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "typography times";
+  src: url("fonts/Typography Times Italic.ttf") format("truetype");
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "typography times";
+  src: url("fonts/Typography Times Bold Italic.ttf") format("truetype");
+  font-weight: bold;
+  font-style: italic;
+}
+
+html {
+	background-image: url('background.png');
+	font-family: 'typography times', times;
+}
+
+header {
+	text-align: center;
+	padding: .5em 0;
+	font-size: 3em;
+	border-bottom: solid 1px;
+	font-family: 'quest', cursive;
+	-webkit-box-shadow: 0 5px 20px 0 #000000;
+	box-shadow: 0 5px 20px 0 #000000;
+	background-color: rgba(153, 102, 51, .2);	
+}

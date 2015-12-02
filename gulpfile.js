@@ -31,7 +31,7 @@ gulp.task('jshint', function() {
 gulp.task('watch', ['build'], function() {
   gulp.watch('./app/**/*.html', ['build'] );
   gulp.watch('./app/*.js', ['build']);
-  gulp.watch('./app/scss/*.scss', ['build']);
+  gulp.watch('./app/sass/*.scss', ['build']);
 });
 
 // Default task
@@ -56,7 +56,7 @@ gulp.task('scripts', function() {
 
 // Styles build task, concatenates all the files
 gulp.task('styles', function() {
-  return gulp.src('./app/scss/*.scss')
+  return gulp.src('./app/sass/*.scss')
     .pipe(sass({
       includePaths: require('node-neat').includePaths
     }))
