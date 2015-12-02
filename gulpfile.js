@@ -66,7 +66,7 @@ gulp.task('styles', function() {
 });
 
 gulp.task('vendor', function() {
-  gulp.src('./app/bower-components/**/*')
+  gulp.src('./app/bower_components/**/*')
     .pipe(gulp.dest('build/vendor'));
 });
 
