@@ -10,8 +10,16 @@ angular.module('countriesApp', ['ngRoute'])
         	controller : 'country-detail-controller'
         }).otherwise('/');
     }])
-    .controller('country-controller', ['$scope', function($scope){
-
+    .factory('countriesRequest', ['$http', function($http){
+        return function(){
+            return $http.get('http://api.geonames.org/countryInfoJSON?username=tbone849');
+        };
+    }])
+    .controller('country-controller', ['$scope', 'countriesRequest', function($scope, countriesRequest){
+        countriesRequest().then(function(response){
+            $scope.data = response.data;
+            console.log($scope.data);
+        });
     }])
     .controller('country-detail-controller', ['$scope', function($scope){
 
