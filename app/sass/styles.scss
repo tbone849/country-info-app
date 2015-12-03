@@ -82,3 +82,39 @@ h2, p {
 		color: #ff8e8e;
 	}
 }
+
+#countriesTable {
+    border-collapse: collapse;
+    border: 1px solid black;
+    height: 35em;
+    overflow-y: scroll;
+    display: block;
+
+    th {
+    	color: rgba(255, 255, 255, .9);
+    	background-color: rgba(0, 0, 0, .5);
+    }
+
+    th, td {
+    	padding: 3px;
+    	width: 6 / 100 * 100%;
+    	border: 1px solid black;
+    }
+
+    td {
+    	text-align: left;
+    }
+
+    tbody tr:nth-child(odd) {
+    	background-color: rgba(255, 255, 255, .7);
+    }
+
+    tbody tr:nth-child(even) {
+    	background-color: rgba(255, 255, 255, .4);
+    }
+
+    tbody tr:hover {
+    	background-color: rgba(102, 204, 255, .7);
+    }
+}
+
