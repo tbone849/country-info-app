@@ -140,6 +140,7 @@ section {
   }
   .data { 
     @include span-columns(5.5); 
+    margin-bottom: 2em;
     span {
       display: inline-flex;
     }
@@ -157,3 +158,6 @@ section {
   }
 }
 
+nav {
+  text-align: center;
+}
