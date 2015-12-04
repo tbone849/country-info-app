@@ -142,7 +142,7 @@ section {
     @include span-columns(5.5); 
     margin-bottom: 2em;
     span {
-      display: inline-flex;
+      display: inline-block;
     }
     a {
       margin-right: .5em;
