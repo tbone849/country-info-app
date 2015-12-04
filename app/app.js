@@ -44,11 +44,9 @@ angular.module('countriesApp', ['ngRoute'])
         var country = $routeParams.country;
         capitalRequest(country).then(function(response){
             $scope.capital = response.data.geonames[0];
-            console.log($scope.capital);
         });
         neighborsRequest(country).then(function(response){
             $scope.neighbors = response.data;
-            console.log($scope.neighbors);
         });
         countryRequest(country).then(function(response){
             $scope.country = response.data.geonames[0];

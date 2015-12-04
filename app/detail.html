@@ -1,5 +1,5 @@
-<h2>{{country.countryName}}</h2>
 <section>
+	<h1 class="country">{{country.countryName}}</h1>
 	<div class="category">
 		<p>Population of Country:</p>
 		<p>Area:</p>
@@ -12,6 +12,10 @@
 		<p>{{country.areaInSqKm | number:0}}</p>
 		<p>{{capital.name}}</p>
 		<p>{{capital.population | number:0}}</p>
-		<p><a ng-repeat="neighbor in neighbors.geonames" ng-href="#/countries/{{neighbor.countryCode}}/capital">{{neighbor.countryName}}</a> </p>
+		<p><a ng-repeat="neighbor in neighbors.geonames" ng-href="#/countries/{{neighbor.countryCode}}/capital">{{neighbor.countryName}}</a></p>
 	</div>
+	<img class="flag" ng-src="http://www.geonames.org/flags/x/{{country.countryCode | lowercase}}.gif">
+	<img class="map" ng-src="http://www.geonames.org/img/country/250/{{country.countryCode}}.png">
 </section>
+<a href="#/" class="button">Home</a>
+<a href="#/countries" class="button">Browse</br> Countries</a>

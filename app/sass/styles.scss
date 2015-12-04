@@ -1,3 +1,6 @@
+@import "bourbon";
+@import "neat";
+
 @font-face {
   font-family: "quest";
   src: url("fonts/Last King Quest.ttf") format("truetype");
@@ -116,5 +119,39 @@ h2, p {
     tbody tr:hover {
     	background-color: rgba(102, 204, 255, .7);
     }
+}
+
+section {
+  @include outer-container;
+
+  .country {
+    font-family: 'quest', cursive;
+    font-size: 2em;
+    margin-left: 2em;
+    margin-bottom: 0;
+    text-align: left;
+  }
+  
+  .category { 
+    @include span-columns(6);
+    p {
+      text-align: right;
+      word-wrap: normal;
+    }
+  }
+  .data { 
+    @include span-columns(5.5); 
+    a {
+      margin-right: .5em;
+    }
+  }
+  
+  .flag {
+    @include shift(2);
+  }
+
+  .flag, .map {
+    @include span-columns(4);
+  }
 }
 
