@@ -10,6 +10,16 @@ angular.module('countriesApp', ['ngRoute'])
         	controller : 'country-detail-controller'
         }).otherwise('/');
     }])
+    .run(['$rootScope', function($rootScope){
+        $rootScope.$on('$routeChangeStart', function(){
+            $rootScope.isLoading = true;
+            console.log($rootScope.isLoading);
+        });
+        $rootScope.$on('$routeChangeSuccess', function(){
+            $rootScope.isLoading = false;
+            console.log($rootScope.isLoading);
+        });
+    }])
     .factory('countriesRequest', ['$http', function($http){
         return function(){
             return $http.get('http://api.geonames.org/countryInfoJSON?username=tbone849', {cache:true});
@@ -41,15 +51,30 @@ angular.module('countriesApp', ['ngRoute'])
     }])
     .controller('country-detail-controller', ['$scope', '$http', '$routeParams', 'capitalRequest', 'neighborsRequest', 'countryRequest', function($scope, $http, $routeParams, capitalRequest, neighborsRequest, countryRequest){
         
+        var loadingCounter = 0;
+        var checkIfLoadingComplete = function(){
+            loadingCounter--;
+            if(loadingCounter === 0){
+                $scope.loadingComplete = true;
+            }
+        }
+        $scope.loadingComplete = false; 
         var country = $routeParams.country;
-        capitalRequest(country).then(function(response){
-            $scope.capital = response.data.geonames[0];
-        });
-        neighborsRequest(country).then(function(response){
-            $scope.neighbors = response.data;
-        });
-        countryRequest(country).then(function(response){
-            $scope.country = response.data.geonames[0];
-            console.log($scope.country);
-        });
+        capitalRequest(country)
+            .then(function(response){
+                $scope.capital = response.data.geonames[0];
+                checkIfLoadingComplete();
+            });
+        neighborsRequest(country)
+            .then(function(response){
+                $scope.neighbors = response.data;
+                checkIfLoadingComplete();
+            });
+        countryRequest(country)
+            .then(function(response){
+                $scope.country = response.data.geonames[0];
+                checkIfLoadingComplete();
+            });
+
+        loadingCounter += 3;
     }]);

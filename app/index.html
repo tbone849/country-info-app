@@ -15,7 +15,7 @@
 		Countries and Capitals
 	</header>
 	<div class="content-container">
-		<section ng-view>
+		<section ng-if="!isLoading" ng-view>
 		</section>
 	</div>
 </body>
