@@ -140,6 +140,9 @@ section {
   }
   .data { 
     @include span-columns(5.5); 
+    span {
+      display: inline-flex;
+    }
     a {
       margin-right: .5em;
     }
