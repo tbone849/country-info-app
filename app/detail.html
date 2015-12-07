@@ -1,3 +1,11 @@
+<section ng-if="!loadingComplete">
+	<h2>Loading... <i class="fa fa-cog fa-spin"></i></h2>
+</section>
+<section ng-if="errors">
+	<p>{{capitalError.message}}</p>
+	<p>{{neighborsError.message}}</p>
+	<p>{{countryError.message}}</p>
+</section>
 <section ng-if="loadingComplete">
 	<h1 class="country">{{country.countryName}}</h1>
 	<div class="category">
@@ -16,8 +24,8 @@
 	</div>
 	<img class="flag" ng-src="http://www.geonames.org/flags/x/{{country.countryCode | lowercase}}.gif">
 	<img class="map" ng-src="http://www.geonames.org/img/country/250/{{country.countryCode}}.png">
+	<nav>
+		<a href="#/" class="button">Home</a>
+		<a href="#/countries" class="button">Browse</br> Countries</a>
+	</nav>
 </section>
-<nav>
-	<a href="#/" class="button">Home</a>
-	<a href="#/countries" class="button">Browse</br> Countries</a>
-</nav>

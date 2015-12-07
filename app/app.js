@@ -1,4 +1,4 @@
-angular.module('countriesApp', ['ngRoute'])
+angular.module('countriesApp', ['ngRoute', 'ngAnimate'])
 	.config(['$routeProvider', function($routeProvider){
         $routeProvider.when('/', {
             templateUrl : 'home.html'
@@ -13,11 +13,9 @@ angular.module('countriesApp', ['ngRoute'])
     .run(['$rootScope', function($rootScope){
         $rootScope.$on('$routeChangeStart', function(){
             $rootScope.isLoading = true;
-            console.log($rootScope.isLoading);
         });
         $rootScope.$on('$routeChangeSuccess', function(){
             $rootScope.isLoading = false;
-            console.log($rootScope.isLoading);
         });
     }])
     .factory('countriesRequest', ['$http', function($http){
@@ -41,13 +39,15 @@ angular.module('countriesApp', ['ngRoute'])
         };
     }])
     .controller('country-controller', ['$scope', '$location', 'countriesRequest', function($scope, $location, countriesRequest){
-        countriesRequest().then(function(response){
-            $scope.data = response.data.geonames;
-        });
-
         $scope.setCapitalURL = function(country){
             $location.path('/countries/' + country.countryCode + '/capital');
         };
+        $scope.isLoading = true;
+        countriesRequest().then(function(response){
+            $scope.data = response.data.geonames;
+            $scope.isLoading = false;
+        });
+
     }])
     .controller('country-detail-controller', ['$scope', '$http', '$routeParams', 'capitalRequest', 'neighborsRequest', 'countryRequest', function($scope, $http, $routeParams, capitalRequest, neighborsRequest, countryRequest){
         
@@ -57,23 +57,33 @@ angular.module('countriesApp', ['ngRoute'])
             if(loadingCounter === 0){
                 $scope.loadingComplete = true;
             }
-        }
-        $scope.loadingComplete = false; 
+        };
+        $scope.loadingComplete = false;
+        $scope.errors = false; 
         var country = $routeParams.country;
         capitalRequest(country)
             .then(function(response){
                 $scope.capital = response.data.geonames[0];
                 checkIfLoadingComplete();
+            }, function(error){
+                $scope.capitalError = error.data.status;
+                $scope.errors = true;
             });
         neighborsRequest(country)
             .then(function(response){
                 $scope.neighbors = response.data;
                 checkIfLoadingComplete();
+            }, function(error){
+                $scope.neighborsError = error.data.status;
+                $scope.errors = true;
             });
         countryRequest(country)
             .then(function(response){
                 $scope.country = response.data.geonames[0];
                 checkIfLoadingComplete();
+            }, function(error){
+                $scope.countryError = error.data.status;
+                $scope.errors = true;
             });
 
         loadingCounter += 3;
