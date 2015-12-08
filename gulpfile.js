@@ -30,7 +30,7 @@ gulp.task('jshint', function() {
 // Watch task
 gulp.task('watch', ['build'], function() {
   gulp.watch('./app/**/*.html', ['build'] );
-  gulp.watch('./app/*.js', ['build']);
+  gulp.watch('./app/scripts/*.js', ['build']);
   gulp.watch('./app/sass/*.scss', ['build']);
 });
 
@@ -46,12 +46,9 @@ gulp.task('html', function() {
 
 // JavaScript build task, removes whitespace and concatenates all files
 gulp.task('scripts', function() {
-  return browserify('./app/app.js')
-    .bundle()
-    .pipe(source('app.js'))
-    .pipe(buffer())
-    .pipe(uglify())
-    .pipe(gulp.dest('build/'));
+  return gulp.src('./app/scripts/**/*')
+    .pipe(concat('app.js'))
+    .pipe(gulp.dest('build/scripts'));
 });
 
 // Styles build task, concatenates all the files
@@ -66,7 +63,7 @@ gulp.task('styles', function() {
 });
 
 gulp.task('vendor', function() {
-  gulp.src('./app/bower_components/**/*')
+  gulp.src('./app/bower_components/*')
     .pipe(gulp.dest('build/vendor'));
 });
 

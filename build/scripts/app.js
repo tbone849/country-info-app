@@ -9,36 +9,10 @@ angular.module('countriesApp', ['ngRoute', 'ngAnimate'])
         	templateUrl : 'detail.html',
         	controller : 'country-detail-controller'
         }).otherwise('/');
-    }])
-    .run(['$rootScope', function($rootScope){
-        $rootScope.$on('$routeChangeStart', function(){
-            $rootScope.isLoading = true;
-        });
-        $rootScope.$on('$routeChangeSuccess', function(){
-            $rootScope.isLoading = false;
-        });
-    }])
-    .factory('countriesRequest', ['$http', function($http){
-        return function(){
-            return $http.get('http://api.geonames.org/countryInfoJSON?username=tbone849', {cache:true});
-        };
-    }])
-    .factory('countryRequest', ['$http', function($http){
-        return function(country){
-            return $http.get('http://api.geonames.org/countryInfoJSON?username=tbone849&country=' + country);
-        };
-    }])
-    .factory('capitalRequest', ['$http', function($http){
-        return function(country){
-            return $http.get('http://api.geonames.org/searchJSON?q=capital&maxRows=1&username=tbone849&country=' + country);
-        };
-    }])
-    .factory('neighborsRequest', ['$http', function($http){
-        return function(country){
-            return $http.get('http://api.geonames.org/neighboursJSON?username=tbone849&country=' + country);
-        };
-    }])
-    .controller('country-controller', ['$scope', '$location', 'countriesRequest', function($scope, $location, countriesRequest){
+    }]);
+    
+    
+angular.module('countriesApp').controller('country-controller', ['$scope', '$location', 'countriesRequest', function($scope, $location, countriesRequest){
         $scope.setCapitalURL = function(country){
             $location.path('/countries/' + country.countryCode + '/capital');
         };
@@ -47,9 +21,8 @@ angular.module('countriesApp', ['ngRoute', 'ngAnimate'])
             $scope.data = response.data.geonames;
             $scope.isLoading = false;
         });
-
-    }])
-    .controller('country-detail-controller', ['$scope', '$http', '$routeParams', 'capitalRequest', 'neighborsRequest', 'countryRequest', function($scope, $http, $routeParams, capitalRequest, neighborsRequest, countryRequest){
+    }]);
+angular.module('countriesApp').controller('country-detail-controller', ['$scope', '$http', '$routeParams', 'capitalRequest', 'neighborsRequest', 'countryRequest', function($scope, $http, $routeParams, capitalRequest, neighborsRequest, countryRequest){
         
         var loadingCounter = 0;
         var checkIfLoadingComplete = function(){
@@ -87,4 +60,24 @@ angular.module('countriesApp', ['ngRoute', 'ngAnimate'])
             });
 
         loadingCounter += 3;
+    }]);
+angular.module('countriesApp').factory('capitalRequest', ['$http', function($http){
+        return function(country){
+            return $http.get('http://api.geonames.org/searchJSON?q=capital&maxRows=1&username=tbone849&country=' + country);
+        };
+    }]);
+angular.module('countriesApp').factory('countriesRequest', ['$http', function($http){
+        return function(){
+            return $http.get('http://api.geonames.org/countryInfoJSON?username=tbone849', {cache:true});
+        };
+    }]);
+angular.module('countriesApp').factory('countryRequest', ['$http', function($http){
+        return function(country){
+            return $http.get('http://api.geonames.org/countryInfoJSON?username=tbone849&country=' + country);
+        };
+    }]);
+angular.module('countriesApp').factory('neighborsRequest', ['$http', function($http){
+        return function(country){
+            return $http.get('http://api.geonames.org/neighboursJSON?username=tbone849&country=' + country);
+        };
     }]);
