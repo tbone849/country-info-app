@@ -20,6 +20,9 @@ angular.module('countriesApp').controller('country-controller', ['$scope', '$loc
         countriesRequest().then(function(response){
             $scope.data = response.data.geonames;
             $scope.isLoading = false;
+        }, function(error){
+            $scope.countriesRequestError = error.data.status;
+            $scope.errors = true;
         });
     }]);
 angular.module('countriesApp').controller('country-detail-controller', ['$scope', '$http', '$routeParams', 'capitalRequest', 'neighborsRequest', 'countryRequest', function($scope, $http, $routeParams, capitalRequest, neighborsRequest, countryRequest){
@@ -45,6 +48,7 @@ angular.module('countriesApp').controller('country-detail-controller', ['$scope'
         neighborsRequest(country)
             .then(function(response){
                 $scope.neighbors = response.data;
+                console.log($scope.neighbors.geonames[0]);
                 checkIfLoadingComplete();
             }, function(error){
                 $scope.neighborsError = error.data.status;

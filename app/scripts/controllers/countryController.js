@@ -6,5 +6,8 @@ angular.module('countriesApp').controller('country-controller', ['$scope', '$loc
         countriesRequest().then(function(response){
             $scope.data = response.data.geonames;
             $scope.isLoading = false;
+        }, function(error){
+            $scope.countriesRequestError = error.data.status;
+            $scope.errors = true;
         });
     }]);

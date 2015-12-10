@@ -21,6 +21,7 @@ angular.module('countriesApp').controller('country-detail-controller', ['$scope'
         neighborsRequest(country)
             .then(function(response){
                 $scope.neighbors = response.data;
+                console.log($scope.neighbors.geonames[0]);
                 checkIfLoadingComplete();
             }, function(error){
                 $scope.neighborsError = error.data.status;

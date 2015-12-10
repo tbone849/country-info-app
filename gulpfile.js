@@ -30,7 +30,7 @@ gulp.task('jshint', function() {
 // Watch task
 gulp.task('watch', ['build'], function() {
   gulp.watch('./app/**/*.html', ['build'] );
-  gulp.watch('./app/scripts/*.js', ['build']);
+  gulp.watch('./app/scripts/**/*.js', ['build']);
   gulp.watch('./app/sass/*.scss', ['build']);
 });
 
