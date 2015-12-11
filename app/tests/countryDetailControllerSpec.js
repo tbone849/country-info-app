@@ -5,6 +5,7 @@ describe('country-detail-controller', function(){
 	var capitalThenSpy;
 	var neighborsThenSpy;
 	var countryThenSpy;
+	var loadingCounterSpy;
 	var testParams = {
 		country: 'USA'
 	};
@@ -54,6 +55,7 @@ describe('country-detail-controller', function(){
 		successHandler({ data: {geonames: ['Washington']}});
 
 		expect(scope.capital).toBe('Washington');
+		expect(scope.loadingComplete).toBe(false);
 	});
 
 	it('should set errors on capitalRequest error', function(){
@@ -92,6 +94,7 @@ describe('country-detail-controller', function(){
 
 		expect(scope.neighbors.geonames[0].countryName).toBe('Canada');
 		expect(scope.neighbors.geonames[1].countryName).toBe('Mexico');
+		expect(scope.loadingComplete).toBe(false);
 	});
 
 	it('should set errors on neighborsRequest error', function(){
@@ -125,6 +128,7 @@ describe('country-detail-controller', function(){
 		successHandler({ data: {geonames: ['Mexico']}});
 
 		expect(scope.country).toBe('Mexico');
+		expect(scope.loadingComplete).toBe(false);
 	});
 
 	it('should set errors on capitalRequest error', function(){
@@ -143,4 +147,15 @@ describe('country-detail-controller', function(){
 		expect(scope.countryError).toBe('test status');
 		expect(scope.errors).toBe(true);
 	});
+
+	// fix this
+	xit('should set $scope.loadingComplete to true after running request functions', function(){
+		var scope = {};
+		controller = $controller('country-detail-controller', {
+			$scope: scope
+		});
+
+		expect(scope.loadingComplete).toBe(true);
+	});
+	
 });
