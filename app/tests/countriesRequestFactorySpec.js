@@ -1,11 +1,9 @@
 describe('countriesRequest', function(){
 	beforeEach(module('countriesApp'));
 
-	it('should return countries data from the geonames API', 
-		inject(function(countryRequest, $httpBackend, $rootScope){
-			$httpBackend.expect('GET', 'http://api.geonames.org/countryInfoJSON?username=tbone849')
-				.respond(200);
-
+	it("should return countries data from the geonames API", 
+		inject(function(countriesRequest, $rootScope, $httpBackend){
+			$httpBackend.expect('GET', 'http://api.geonames.org/countryInfoJSON?username=tbone849').respond(200);
 			var status = false;
         	countriesRequest().success(function() {
         	    status = true;
